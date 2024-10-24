@@ -10,7 +10,7 @@
 
 
 
-Tech used in this project 
+# Tech used in this project 
 -Javascript 
 -HTML
 -CSS
