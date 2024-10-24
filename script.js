@@ -119,12 +119,6 @@ function fetchBookmarks(){
         
     }
 
-
-
-
-
-
-
 // Handle data from form
 function storeBookmark(e){
     e.preventDefault();
