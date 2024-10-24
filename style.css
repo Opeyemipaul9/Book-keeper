@@ -179,7 +179,7 @@ button:hover{
 }
 
 button:focus{
-  outline: none;
+  outline: none  ;
 }
 
 
