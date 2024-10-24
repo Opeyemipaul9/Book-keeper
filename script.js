@@ -38,36 +38,46 @@ function validate(nameValue , urlValue){
     // Valid 
     return true;
 }
+
+
 // Build Bookmarks DOM
 function buildBookmarks(){
+    // Remove Bookmark elements
+    bookmarksContainer.textContent = '';
+
+    
     // Build items
     bookmarks.forEach((bookmark) =>{
         const {name , url} = bookmark;
-        // iTEM
+
+        // Creating Items
         const item = document.createElement('div');
         item.classList.add('item');
-        // close icon
+
+        // Close icon
         const closeIcon = document.createElement('i');
         closeIcon.classList.add('fas', 'fa-times');
         closeIcon.setAttribute('title', 'Delete Bookmark');
-        closeIcon.setAttribute('onclick', `deleteBookmark('${url})`);
+        closeIcon.setAttribute('onclick', `deleteBookmark('${url}')`);
 
-        // Favicon/ Link container
-        const linkinfo = document.createElement('div');
-        linkinfo.classList.add('name');
+        //Link container
+        const linkInfo = document.createElement('div');
+        linkInfo.classList.add('name');
 
         // Favicon
         const favicon = document.createElement('img');
         favicon.setAttribute('src',`https://s2.googleusercontent.com/s2/favicons?domain=${url}`);
         favicon.setAttribute('alt', 'Favicon');
+        
         // Link
         const link = document.createElement('a');
         link.setAttribute('href', `${url}`);
         link.setAttribute('target', '_blank');
         link.textContent = name;
+
         // Append to bookmarks container
-        linkinfo.append(favicon,link);
-        item.append(closeIcon,linkinfo);
+        linkInfo.append(favicon,link);
+        item.append(closeIcon,linkInfo);
         bookmarksContainer.appendChild(item);
         console.log('james');
     });
@@ -96,7 +106,24 @@ function fetchBookmarks(){
      buildBookmarks();
     }
 
-    
+    // Delete Bookmark
+    function deleteBookmark(url){
+        bookmarks.forEach((bookmark,i) =>{
+            if(bookmark.url === url){
+                bookmarks.splice(i,1);
+            }
+        });
+        // Update BBookmarks array in local storage, re-populate dom
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+        fetchBookmarks();
+        
+    }
+
+
+
+
+
+
 
 // Handle data from form
 function storeBookmark(e){
